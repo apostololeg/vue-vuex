@@ -2,9 +2,19 @@
     <div id="game">
         <Bin side="left"
             @item-click="onItemClick"
+            :class="{
+                full: isLeftFull,
+                locked: isRightFull,
+                completed: isComplete
+            }"
             />
         <Bin side="right"
             @item-click="onItemClick"
+            :class="{
+                full: isRightFull,
+                locked: isLeftFull,
+                completed: isComplete
+            }"
             />
     </div>
 </template>
@@ -22,6 +32,9 @@
             }
         },
         computed: {
+            maxItemsInBox() {
+                return this.$store.getters.maxItemsInBox
+            },
             itemsLeft() {
                 return this.$store.getters.itemsLeft
             },
@@ -32,12 +45,6 @@
                 return this.itemsLeft.length === this.maxItemsInBox
             },
             isRightFull() {
-                return this.itemsRight.length === this.maxItemsInBox
-            },
-            isLeftFull() {
-                return this.itemsLeft.length === this.maxItemsInBox
-            },
-            isLeftFull() {
                 return this.itemsRight.length === this.maxItemsInBox
             },
             isComplete() {
@@ -54,3 +61,10 @@
         }
     }
 </script>
+
+<style>
+#game {
+    display: flex;
+    justify-content: center;
+}
+</style>

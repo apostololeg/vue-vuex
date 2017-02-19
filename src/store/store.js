@@ -36,6 +36,7 @@ export default new Vuex.Store({
         }
     },
     getters: {
+        maxItemsInBox: state => state.maxItemsInBox,
         items: state => state.items,
         itemsLeft: state => state.items.filter((item) => item.side === 'left'),
         itemsRight: state => state.items.filter((item) => item.side === 'right')
